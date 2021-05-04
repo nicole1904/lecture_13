@@ -42,10 +42,32 @@ def binary_search(seq, number):
     return
 
 
+def rekurzivne_hladanie_binarneho_charakteru(num_list, number, left_end, right_end):
+
+    middle_idx = (left_end + right_end) // 2
+    if left_end == right_end:
+        return -1
+
+    if num_list[middle_idx] < number:
+        return rekurzivne_hladanie_binarneho_charakteru(num_list, number, middle_idx + 1, right_end)
+
+    elif num_list[middle_idx] > number:
+        return rekurzivne_hladanie_binarneho_charakteru(num_list, number, left_end, middle_idx)
+
+    elif num_list[middle_idx] == number:
+        return middle_idx
+
+    else:
+        return middle_idx
+
+
 def main(file_name, number):
     sequence = read_data(file_name=file_name, key='ordered_numbers')
 
-    # iterative binary search
+    idx = rekurzivne_hladanie_binarneho_charakteru(sequence, -1, 0, (len(sequence)-1))
+    print(idx)
+
+# iterative binary search
     binary_search(sequence, number=number)
 
 
